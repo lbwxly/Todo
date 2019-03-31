@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Todo.Infrastructure;
+using Todo.Infrastructure.Auth;
 
 namespace Todo
 {
@@ -10,6 +12,8 @@ namespace Todo
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.MessageHandlers.Add(new RequestMonitorHandler());
+            config.MessageHandlers.Add(new AuthenticationHandler());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
