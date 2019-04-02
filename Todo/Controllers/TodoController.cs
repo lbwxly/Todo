@@ -12,48 +12,51 @@ using Todo.Repository;
 
 namespace Todo.Controllers
 {
+    /// <summary>
+    /// Todo api.
+    /// </summary>
     [RoutePrefix("todos")]
-    [BasicAuthorize]
+    //[BasicAuthorize]
     public class TodoController : ApiController
     {
-        private TodoRepository _todoRepository = new TodoRepository();
+        private readonly TodoRepository _todoRepository = new TodoRepository();
 
         /// <summary>
-        /// Lists all todo items.
+        /// Lists all todo items or the item in the specify date.
         /// </summary>
         /// <returns></returns>
+        //[Route]
+        //[HttpGet]
+        //public IEnumerable<TodoItem> List([ModelBinder(BinderType = typeof(DateBinder))]DateTime? date = null)
+        //{
+        //    if (date == null)
+        //    {
+        //        date = DateTime.Today;
+        //    }
+
+        //    return _todoRepository.List(date.Value, date.Value.AddDays(1));
+        //}
+
         [Route]
         [HttpGet]
-        public IEnumerable<TodoItem> List([ModelBinder(BinderType = typeof(DateBinder))]DateTime? date = null)
+        public IEnumerable<TodoItem> List()
         {
-            if (date == null)
-            {
-                date = DateTime.Today;
-            }
-
-            return _todoRepository.List(date.Value, date.Value.AddDays(1));
+            return _todoRepository.List(DateTime.MinValue, DateTime.MaxValue);
         }
 
-        //[Route]
-        //[HttpGet]
-        //public IEnumerable<TodoItem> List(bool byYear, int year = 2019)
-        //{
-        //    return _todoRepository.List(DateTime.MinValue, DateTime.MaxValue);
-        //}
-
-        ///// <summary>
-        ///// Lists todo items by date.
-        ///// </summary>
-        ///// <param name="date">target date</param>
-        ///// <returns>todo item list match the date</returns>
-        //[Route]
-        //[HttpGet]
-        //[SwaggerOperation("ListByDueTime")]
-        //public IEnumerable<TodoItem> List(DateTime? date)
-        //{
-        //    DateTime targetDate = date ?? DateTime.Today;
-        //    return _todoRepository.List(targetDate, targetDate);
-        //}
+        /// <summary>
+        /// Lists todo items by date.
+        /// </summary>
+        /// <param name="date">target date</param>
+        /// <returns>todo item list match the date</returns>
+        [Route]
+        [HttpGet]
+        [SwaggerOperation("ListByDueTime")]
+        public IEnumerable<TodoItem> List(DateTime? date)
+        {
+            DateTime targetDate = date ?? DateTime.Today;
+            return _todoRepository.List(targetDate, targetDate.AddDays(1));
+        }
 
 
         /// <summary>
@@ -96,10 +99,15 @@ namespace Todo.Controllers
         /// Delete a todo item with id.
         /// </summary>
         /// <param name="id">the id of deleting todo item.</param>
+        /// <param name="throwException">exception will be thrown if the value is true.</param>
         [Route("{id:guid}")]
         [HttpDelete]
-        public void Delete(Guid id)
+        public void Delete(Guid id, bool throwException = false)
         {
+            if (throwException)
+            {
+                throw new Exception("error");
+            }
             _todoRepository.Delete(id);
         }
     }

@@ -481,11 +481,23 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="M:Todo.Controllers.TodoController.List(System.Nullable{System.DateTime})">
+        <member name="T:Todo.Controllers.TodoController">
             <summary>
-            Lists all todo items.
+            Todo api.
+            </summary>
+        </member>
+        <member name="M:Todo.Controllers.TodoController.List">
+            <summary>
+            Lists all todo items or the item in the specify date.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Todo.Controllers.TodoController.List(System.Nullable{System.DateTime})">
+            <summary>
+            Lists todo items by date.
+            </summary>
+            <param name="date">target date</param>
+            <returns>todo item list match the date</returns>
         </member>
         <member name="M:Todo.Controllers.TodoController.Get(System.Guid)">
             <summary>
@@ -507,11 +519,17 @@
             </summary>
             <param name="item">the updated item.</param>
         </member>
-        <member name="M:Todo.Controllers.TodoController.Delete(System.Guid)">
+        <member name="M:Todo.Controllers.TodoController.Delete(System.Guid,System.Boolean)">
             <summary>
             Delete a todo item with id.
             </summary>
             <param name="id">the id of deleting todo item.</param>
+            <param name="throwException">exception will be thrown if the value is true.</param>
+        </member>
+        <member name="T:Todo.Infrastructure.ErrorHandlingFilter">
+            <summary>
+            Global error handling
+            </summary>
         </member>
         <member name="T:Todo.Models.TodoItem">
             <summary>
