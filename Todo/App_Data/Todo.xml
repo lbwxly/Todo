@@ -486,18 +486,11 @@
             Todo api.
             </summary>
         </member>
-        <member name="M:Todo.Controllers.TodoController.List">
+        <member name="M:Todo.Controllers.TodoController.List(System.Nullable{System.DateTime})">
             <summary>
             Lists all todo items or the item in the specify date.
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:Todo.Controllers.TodoController.List(System.Nullable{System.DateTime})">
-            <summary>
-            Lists todo items by date.
-            </summary>
-            <param name="date">target date</param>
-            <returns>todo item list match the date</returns>
         </member>
         <member name="M:Todo.Controllers.TodoController.Get(System.Guid)">
             <summary>

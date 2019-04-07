@@ -12,9 +12,9 @@ namespace Todo
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            //config.MessageHandlers.Add(new RequestMonitorHandler());
-            //config.MessageHandlers.Add(new AuthenticationHandler());
-            //config.Filters.Add(new ErrorHandlingFilter());
+            config.MessageHandlers.Add(new RequestMonitorHandler());
+            config.MessageHandlers.Add(new AuthenticationHandler());
+            config.Filters.Add(new ErrorHandlingFilter());
             // Web API routes
             config.MapHttpAttributeRoutes();
 
